@@ -1,0 +1,69 @@
+@import "../node_modules/bootstrap/scss/functions";
+
+// 若有變數要改變，放在variables的前面！！
+$bg-color: #14151a;
+$bg-card: #1e1e26;
+
+@import "../node_modules/bootstrap/scss/variables";
+
+// 擴充fs-7、fs-8
+
+@import "../node_modules/bootstrap/scss/maps";
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/utilities";
+
+// 自定義utilities裡面的高度和背景(為啥要包那麼多層？？)
+$utilities: map-merge(
+  $utilities,
+  (
+    "height":
+      map-merge(
+        map-get($utilities, "height"),
+        (
+          responsive: true,
+          values:
+            map-merge(
+              map-get(map-get($utilities, "height"), "values"),
+              (
+                // 新增 h-header、h-chart、h-form-item
+                "header": 60px,
+                "chart": 500px,
+                "form-item": 50px
+              )
+            ),
+        )
+      ),
+    "background-color":
+      map-merge(
+        map-get($utilities, "background-color"),
+        (
+          responsive: true,
+          values:
+            map-merge(
+              map-get(map-get($utilities, "background-color"), "values"),
+              (
+                // 新增bg-dark、bg-card
+                "dark": $bg-color,
+                "card": $bg-card,
+              )
+            ),
+        )
+      ),
+  )
+);
+
+$utilities: map-merge(
+  $utilities,
+  (
+    // 滑鼠移過去變成手手的效果
+    "cursor":
+      (
+        responsive: true,
+        property: cursor,
+        class: cursor,
+        values: pointer,
+      )
+  )
+);
+
+@import "../node_modules/bootstrap/scss/bootstrap";
